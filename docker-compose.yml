@@ -33,17 +33,6 @@ services:
       timeout: 5s
       retries: 10
 
-  ch-ui:
-    image: ghcr.io/caioricciuti/ch-ui:latest
-    container_name: ch-ui
-    restart: unless-stopped
-    ports:
-      - "5521:3488"
-    command: ["server", "--clickhouse-url", "http://clickhouse:8123", "--connection-name", "devbox"]
-    depends_on:
-      clickhouse:
-        condition: service_healthy
-
 
   homer:
     image: b4bz/homer:latest
@@ -98,16 +87,6 @@ services:
     volumes:
       - redis_data:/data
 
-  redisinsight:
-    image: redis/redisinsight:latest
-    container_name: redisinsight
-    restart: unless-stopped
-    ports:
-      - "5540:5540"
-    volumes:
-      - redisinsight_data:/data
-    depends_on:
-      - redis
 
   redpanda:
     image: redpandadata/redpanda:latest
@@ -134,34 +113,15 @@ services:
     volumes:
       - redpanda_data:/var/lib/redpanda/data
 
-  redpanda-console:
-    image: redpandadata/console:latest
-    container_name: redpanda-console
-    restart: unless-stopped
-    entrypoint: /bin/sh
-    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
-    environment:
-      CONFIG_FILEPATH: /tmp/config.yml
-      CONSOLE_CONFIG_FILE: |
-        kafka:
-          brokers: ["redpanda:9092"]
-        redpanda:
-          adminApi:
-            enabled: true
-            urls: ["http://redpanda:9644"]
-    ports:
-      - "8080:8080"
-    depends_on:
-      - redpanda
 
-  cloudbeaver:
-    image: dbeaver/cloudbeaver:latest
-    container_name: cloudbeaver
+  redis-exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: redis-exporter
     restart: unless-stopped
-    ports:
-      - "8978:8978"
-    volumes:
-      - cloudbeaver_data:/opt/cloudbeaver/workspace
+    environment:
+      REDIS_ADDR: redis://redis:6379
+    depends_on:
+      - redis
 
   mongodb-exporter:
     image: percona/mongodb_exporter:0.40
@@ -239,5 +199,4 @@ volumes:
   mysql_replica_data:
   redpanda_data:
   redis_data:
-  redisinsight_data:
-  cloudbeaver_data:
+

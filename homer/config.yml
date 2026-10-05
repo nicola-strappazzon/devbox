@@ -58,36 +58,6 @@ services:
         tag: "OTLP"
         icon: "fas fa-satellite-dish"
 
-  - name: "Clients"
-    icon: "fas fa-laptop-code"
-    items:
-      - name: "CloudBeaver"
-        subtitle: "MySQL · MongoDB · ClickHouse"
-        tag: ":8978"
-        url: "http://devbox.local:8978"
-        target: "_blank"
-        icon: "fas fa-database"
-
-      - name: "CH-UI"
-        subtitle: "ClickHouse query interface"
-        tag: ":5521"
-        url: "http://devbox.local:5521"
-        target: "_blank"
-        icon: "fas fa-table"
-
-      - name: "RedisInsight"
-        subtitle: "Redis client oficial"
-        tag: ":5540"
-        url: "http://devbox.local:5540"
-        target: "_blank"
-        icon: "fas fa-memory"
-
-      - name: "Redpanda Console"
-        subtitle: "Topics · Consumer groups · Schema"
-        tag: ":8080"
-        url: "http://devbox.local:8080"
-        target: "_blank"
-        icon: "fas fa-stream"
 
   - name: "Databases"
     icon: "fas fa-database"

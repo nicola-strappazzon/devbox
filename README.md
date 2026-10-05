@@ -7,10 +7,8 @@
 | Homer | 80 | — | — | `http://devbox.local` — dashboard con todos los servicios |
 | MongoDB | 27017 | — | — | `mongodb://devbox.local:27017` |
 | ClickHouse | 8123 (HTTP), 9000 (native) | `default` | `clickhouse` | `docker exec -it clickhouse clickhouse-client --password clickhouse` |
-| CH-UI | 5521 | `default` | `clickhouse` | `http://devbox.local:5521` — web query interface |
 | Redis | 6379 | — | — | `redis://devbox.local:6379` |
-| RedisInsight | 5540 | — | — | `http://devbox.local:5540` — conectar a host `redis` port `6379` |
-| CloudBeaver | 8978 | admin (setup) | — | `http://devbox.local:8978` — MySQL · MongoDB · ClickHouse |
+
 | MySQL Primary | 3306 | `root` | `root` | `mysql -h devbox.local -P 3306 -u root -proot` |
 | MySQL Replica | 3307 | `root` | `root` | `mysql -h devbox.local -P 3307 -u root -proot` — read-only |
 | OTel Collector | 4317 (gRPC), 4318 (HTTP) | — | — | `OTEL_EXPORTER_OTLP_ENDPOINT=http://devbox.local:4317` |
