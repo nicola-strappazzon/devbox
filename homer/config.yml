@@ -53,6 +53,12 @@ services:
         url: "http://devbox.local:9090"
         icon: "fas fa-fire"
 
+      - name: "Uptime Kuma"
+        subtitle: "admin / admin123"
+        tag: ":3001"
+        url: "http://devbox.local:3001"
+        icon: "fas fa-heartbeat"
+
       - name: "OTel Collector"
         subtitle: "gRPC :4317 · HTTP :4318"
         tag: "OTLP"

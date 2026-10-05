@@ -163,7 +163,7 @@ services:
       - "4317:4317"
       - "4318:4318"
     environment:
-      OTEL_TOKEN: ${OTEL_TOKEN:?set OTEL_TOKEN in .env}
+      OTEL_TOKEN: devtoken
     volumes:
       - ./otel/config.yaml:/etc/otelcol-contrib/config.yaml
 
@@ -192,6 +192,30 @@ services:
     depends_on:
       - prometheus
 
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - uptime_kuma_data:/app/data
+
+  uptime-kuma-provision:
+    image: python:3.12-slim
+    container_name: uptime-kuma-provision
+    restart: "no"
+    environment:
+      KUMA_URL: http://uptime-kuma:3001
+      KUMA_USER: admin
+      KUMA_PASSWORD: admin123
+    volumes:
+      - ./uptimekuma/provision.py:/provision.py:ro
+    command: sh -c "pip install -q uptime-kuma-api && python /provision.py"
+    depends_on:
+      uptime-kuma:
+        condition: service_healthy
+
 volumes:
   mongo_data:
   clickhouse_data:
@@ -201,4 +225,4 @@ volumes:
   mysql_replica_data:
   redpanda_data:
   redis_data:
-
+  uptime_kuma_data:
