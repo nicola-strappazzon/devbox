@@ -162,6 +162,8 @@ services:
     ports:
       - "4317:4317"
       - "4318:4318"
+    environment:
+      OTEL_TOKEN: ${OTEL_TOKEN:?set OTEL_TOKEN in .env}
     volumes:
       - ./otel/config.yaml:/etc/otelcol-contrib/config.yaml
 

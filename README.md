@@ -11,7 +11,7 @@
 
 | MySQL Primary | 3306 | `root` | `root` | `mysql -h devbox.local -P 3306 -u root -proot` |
 | MySQL Replica | 3307 | `root` | `root` | `mysql -h devbox.local -P 3307 -u root -proot` — read-only |
-| OTel Collector | 4317 (gRPC), 4318 (HTTP) | — | — | `OTEL_EXPORTER_OTLP_ENDPOINT=http://devbox.local:4317` |
+| OTel Collector | 4317 (gRPC), 4318 (HTTP) | — | Bearer `OTEL_TOKEN` (from `.env`) | `OTEL_EXPORTER_OTLP_ENDPOINT=http://devbox.local:4317` + `OTEL_EXPORTER_OTLP_HEADERS="authorization=Bearer $OTEL_TOKEN"` |
 | Prometheus | 9090 | — | — | `http://devbox.local:9090` |
 | Grafana | 3000 | `admin` | `grafana` | `http://devbox.local:3000` — Prometheus pre-configured |
 
