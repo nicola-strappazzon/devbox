@@ -29,6 +29,16 @@ GTID-based replication. Primary → Replica (read-only). Replication user: `repl
 ./watch-ip.sh
 ```
 
+## Evitar sleep al cerrar la tapa (macOS)
+
+```bash
+caffeinate -i &                        # previene idle sleep, permite apagar pantalla (sesión actual)
+sudo pmset -a disablesleep 1           # deshabilita sleep por cierre de tapa (requiere admin)
+sudo pmset -a displaysleep 10          # apaga pantalla tras 10 min de inactividad (requiere admin)
+```
+
+Sin permisos de admin: **Amphetamine** (App Store, gratis) con la opción "Allow Display to Sleep".
+
 ## Commands
 
 ```bash
