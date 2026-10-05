@@ -6,15 +6,16 @@
 |---|---|---|---|---|
 | Homer | 80 | — | — | `http://devbox.local` — dashboard con todos los servicios |
 | MongoDB | 27017 | — | — | `mongodb://devbox.local:27017` |
-| ClickHouse | 8123 (HTTP), 9000 (native) | `default` | `clickhouse` | `docker exec -it clickhouse clickhouse-client --password clickhouse` |
+| ClickHouse | 8123 (HTTP), 9000 (native) | `default` | `clickhouse` | `docker exec -it clickhouse clickhouse-client --password clickhouse` — web UI: `http://devbox.local:8123/play?user=default` |
 | Redis | 6379 | — | — | `redis://devbox.local:6379` |
-
+| Redis Insight | 5540 | — | — | `http://devbox.local:5540` — cliente web de Redis (conexión `redis` preconfigurada) |
+| Redpanda Console | 8088 | — | — | `http://devbox.local:8088` — cliente web de Redpanda (topics, consumers, schemas) |
 | MySQL Primary | 3306 | `root` | `root` | `mysql -h devbox.local -P 3306 -u root -proot` |
 | MySQL Replica | 3307 | `root` | `root` | `mysql -h devbox.local -P 3307 -u root -proot` — read-only |
-| OTel Collector | 4317 (gRPC), 4318 (HTTP) | — | Bearer `devtoken` | `OTEL_EXPORTER_OTLP_ENDPOINT=http://devbox.local:4317` + `OTEL_EXPORTER_OTLP_HEADERS="authorization=Bearer devtoken"` |
+| OTel Collector | 4317 (gRPC), 4318 (HTTP) | — | Bearer `devtoken` | `http://devbox.local:4317` — header `authorization=Bearer devtoken` |
 | Prometheus | 9090 | — | — | `http://devbox.local:9090` |
-| Uptime Kuma | 3001 | `admin` | `admin123` | `http://devbox.local:3001` — monitors auto-provisioned for every service (`uptimekuma/provision.py`) |
-| Grafana | 3000 | `admin` | `grafana` | `http://devbox.local:3000` — Prometheus pre-configured |
+| Uptime Kuma | 3001 | — | — | `http://devbox.local:3001` — monitors auto-provisioned for every service (`uptimekuma/provision.py`) |
+| Grafana | 3000 | — | — | `http://devbox.local:3000` — Prometheus pre-configured |
 
 ## MySQL Replication
 

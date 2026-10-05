@@ -42,10 +42,15 @@ services:
     icon: "fas fa-chart-line"
     items:
       - name: "Grafana"
-        subtitle: "admin / grafana"
+        subtitle: "Dashboards"
         tag: ":3000"
         url: "http://devbox.local:3000"
         icon: "fas fa-chart-bar"
+
+      - name: "OTel Collector"
+        subtitle: "token: devtoken"
+        tag: "OTLP"
+        icon: "fas fa-satellite-dish"
 
       - name: "Prometheus"
         subtitle: "Metrics store"
@@ -54,29 +59,33 @@ services:
         icon: "fas fa-fire"
 
       - name: "Uptime Kuma"
-        subtitle: "admin / admin123"
+        subtitle: "Uptime monitoring"
         tag: ":3001"
         url: "http://devbox.local:3001"
         icon: "fas fa-heartbeat"
 
-      - name: "OTel Collector"
-        subtitle: "gRPC :4317 · HTTP :4318"
-        tag: "OTLP"
-        icon: "fas fa-satellite-dish"
-
-
   - name: "Databases"
     icon: "fas fa-database"
     items:
+      - name: "ClickHouse"
+        subtitle: "user: default pass: clickhouse"
+        tag: ":8123"
+        icon: "fas fa-bolt"
+
       - name: "MongoDB"
         subtitle: "mongodb://devbox.local:27017"
         tag: ":27017"
         icon: "fas fa-leaf"
 
-      - name: "ClickHouse"
-        subtitle: "default / clickhouse"
-        tag: ":8123"
-        icon: "fas fa-bolt"
+      - name: "MySQL Primary"
+        subtitle: "user: root pass: root"
+        tag: ":3306"
+        icon: "fas fa-database"
+
+      - name: "MySQL Replica"
+        subtitle: "user: root pass: root"
+        tag: ":3307"
+        icon: "fas fa-clone"
 
       - name: "Redis"
         subtitle: "devbox.local:6379"
@@ -88,12 +97,23 @@ services:
         tag: ":19092"
         icon: "fas fa-stream"
 
-      - name: "MySQL Primary"
-        subtitle: "root / root"
-        tag: ":3306"
-        icon: "fas fa-database"
+  - name: "Clients"
+    icon: "fas fa-desktop"
+    items:
+      - name: "ClickHouse Play"
+        subtitle: "user: default pass: clickhouse"
+        tag: ":8123"
+        url: "http://devbox.local:8123/play?user=default"
+        icon: "fas fa-bolt"
 
-      - name: "MySQL Replica"
-        subtitle: "root / root · read-only"
-        tag: ":3307"
-        icon: "fas fa-clone"
+      - name: "Redis Insight"
+        subtitle: "Browse keys, CLI, profiler"
+        tag: ":5540"
+        url: "http://devbox.local:5540"
+        icon: "fas fa-memory"
+
+      - name: "Redpanda Console"
+        subtitle: "Topics, consumers, schemas"
+        tag: ":8088"
+        url: "http://devbox.local:8088"
+        icon: "fas fa-stream"

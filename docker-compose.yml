@@ -88,6 +88,21 @@ services:
       - redis_data:/data
 
 
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redisinsight
+    restart: unless-stopped
+    ports:
+      - "5540:5540"
+    environment:
+      RI_ACCEPT_TERMS_AND_CONDITIONS: "true"
+      RI_PRE_SETUP_DATABASES_PATH: /config/databases.json
+    volumes:
+      - redisinsight_data:/data
+      - ./redisinsight/databases.json:/config/databases.json:ro
+    depends_on:
+      - redis
+
   redpanda:
     image: redpandadata/redpanda:latest
     container_name: redpanda
@@ -113,6 +128,21 @@ services:
     volumes:
       - redpanda_data:/var/lib/redpanda/data
 
+
+  redpanda-console:
+    image: redpandadata/console:latest
+    container_name: redpanda-console
+    restart: unless-stopped
+    ports:
+      - "8088:8080"
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+      KAFKA_SCHEMAREGISTRY_ENABLED: "true"
+      KAFKA_SCHEMAREGISTRY_URLS: http://redpanda:8081
+      REDPANDA_ADMINAPI_ENABLED: "true"
+      REDPANDA_ADMINAPI_URLS: http://redpanda:9644
+    depends_on:
+      - redpanda
 
   redis-exporter:
     image: oliver006/redis_exporter:latest
@@ -185,6 +215,9 @@ services:
       - "3000:3000"
     environment:
       GF_SECURITY_ADMIN_PASSWORD: grafana
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -193,11 +226,13 @@ services:
       - prometheus
 
   uptime-kuma:
-    image: louislam/uptime-kuma:1
+    image: louislam/uptime-kuma:2
     container_name: uptime-kuma
     restart: unless-stopped
     ports:
       - "3001:3001"
+    environment:
+      UPTIME_KUMA_DB_TYPE: sqlite
     volumes:
       - uptime_kuma_data:/app/data
 
@@ -205,13 +240,9 @@ services:
     image: python:3.12-slim
     container_name: uptime-kuma-provision
     restart: "no"
-    environment:
-      KUMA_URL: http://uptime-kuma:3001
-      KUMA_USER: admin
-      KUMA_PASSWORD: admin123
     volumes:
       - ./uptimekuma/provision.py:/provision.py:ro
-    command: sh -c "pip install -q uptime-kuma-api && python /provision.py"
+    command: sh -c "pip install -q uptime-kuma-api-v2 && python /provision.py"
     depends_on:
       uptime-kuma:
         condition: service_healthy
@@ -226,3 +257,4 @@ volumes:
   redpanda_data:
   redis_data:
   uptime_kuma_data:
+  redisinsight_data:
