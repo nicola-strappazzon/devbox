@@ -16,6 +16,7 @@ MONITORS = [
     ("MongoDB", PORT, "mongo", 27017),
     ("ClickHouse", HTTP, "http://clickhouse:8123/ping", None),
     ("Redis", PORT, "redis", 6379),
+    ("Portainer", HTTP, "http://portainer:9000", None),
     ("Redis Insight", HTTP, "http://redisinsight:5540", None),
     ("Redpanda (Kafka)", PORT, "redpanda", 9092),
     ("Redpanda (Admin)", HTTP, "http://redpanda:9644/v1/status/ready", None),

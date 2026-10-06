@@ -48,7 +48,7 @@ services:
         icon: "fas fa-chart-bar"
 
       - name: "OTel Collector"
-        subtitle: "token: devtoken"
+        subtitle: "http://devbox.local:4317 token: devtoken"
         tag: "OTLP"
         icon: "fas fa-satellite-dish"
 
@@ -105,6 +105,12 @@ services:
         tag: ":8123"
         url: "http://devbox.local:8123/play?user=default"
         icon: "fas fa-bolt"
+
+      - name: "Portainer"
+        subtitle: "user: admin pass: portainer123"
+        tag: ":9002"
+        url: "http://devbox.local:9002"
+        icon: "fab fa-docker"
 
       - name: "Redis Insight"
         subtitle: "Browse keys, CLI, profiler"
