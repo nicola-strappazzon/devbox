@@ -47,11 +47,17 @@ services:
         url: "http://devbox.local:8123/play?user=default"
         icon: "fas fa-bolt"
 
-      - name: "Portainer"
-        subtitle: "user: admin pass: portainer123"
-        tag: ":9002"
-        url: "http://devbox.local:9002"
+      - name: "Dozzle"
+        subtitle: "logs, start/stop, shell (no auth)"
+        tag: ":9003"
+        url: "http://devbox.local:9003"
         icon: "fab fa-docker"
+
+      - name: "pgAdmin"
+        subtitle: "user: admin@example.com pass: admin"
+        tag: ":5050"
+        url: "http://devbox.local:5050"
+        icon: "fas fa-table"
 
       - name: "Redis Insight"
         subtitle: "Browse keys, CLI, profiler"
@@ -87,6 +93,11 @@ services:
         subtitle: "user: root pass: root"
         tag: ":3307"
         icon: "fas fa-clone"
+
+      - name: "PostgreSQL"
+        subtitle: "user: postgres pass: postgres"
+        tag: ":5432"
+        icon: "fas fa-database"
 
       - name: "Redis"
         subtitle: "devbox.local:6379"

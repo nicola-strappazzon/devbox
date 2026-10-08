@@ -8,7 +8,7 @@
 | MongoDB | 27017 | — | — | `mongodb://devbox.local:27017` |
 | ClickHouse | 8123 (HTTP), 9000 (native) | `default` | `clickhouse` | `docker exec -it clickhouse clickhouse-client --password clickhouse` — web UI: `http://devbox.local:8123/play?user=default` |
 | Redis | 6379 | — | — | `redis://devbox.local:6379` |
-| Portainer | 9002 | `admin` | `portainer123` | `http://devbox.local:9002` — gestión web de contenedores (iniciar, parar, logs, terminal) |
+| Dozzle | 9003 | — | — | `http://devbox.local:9003` — logs, iniciar/detener/reiniciar contenedores y shell (sin auth) |
 | Redis Insight | 5540 | — | — | `http://devbox.local:5540` — cliente web de Redis (conexión `redis` preconfigurada) |
 | Redpanda Console | 8088 | — | — | `http://devbox.local:8088` — cliente web de Redpanda (topics, consumers, schemas) |
 | MySQL Primary | 3306 | `root` | `root` | `mysql -h devbox.local -P 3306 -u root -proot` |
